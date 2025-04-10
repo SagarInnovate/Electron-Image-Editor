@@ -1,0 +1,46 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Electron build artifacts
+/dist/
+/build/
+/out/
+
+# Compiled source files
+*.tsbuildinfo
+
+# Webpack output
+webpack-stats.json
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Electron packaging files
+*.asar
+
+# Cache
+.cache/
+.vscode/.history/
+
+# Optional: exclude generated installers
+*.exe
+*.dmg
+*.AppImage
+
+# VSCode settings (optional)
+.vscode/
+
+# Electron Forge / Builder output (if used)
+release/

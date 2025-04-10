@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utility classes */
+@layer components {
+  /* Custom button styles */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500;
+  }
+  
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 focus:ring-accent-500;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white;
+  }
+
+  /* Tool button */
+  .tool-btn {
+    @apply flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200 
+    text-gray-300 hover:text-white hover:bg-gray-700;
+  }
+  
+  .tool-btn.active {
+    @apply bg-primary-600 text-white;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    @apply h-full bg-gray-800 text-white flex flex-col overflow-hidden transition-all duration-300;
+  }
+  
+  /* Slider controls */
+  .slider-control {
+    @apply w-full appearance-none h-2 bg-gray-700 rounded-full outline-none;
+  }
+  
+  .slider-control::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-primary-500 cursor-pointer;
+  }
+  
+  /* Image thumbnail */
+  .image-thumbnail {
+    @apply relative rounded-lg overflow-hidden border-2 transition-all duration-200;
+  }
+  
+  .image-thumbnail:hover {
+    @apply border-primary-500 shadow-neon;
+  }
+  
+  .image-thumbnail.selected {
+    @apply border-primary-500 shadow-neon;
+  }
+  
+  /* Custom title bar */
+  .title-bar {
+    @apply flex items-center justify-between px-4 py-2 bg-gray-900 text-white;
+    -webkit-app-region: drag;
+  }
+  
+  .title-bar-controls {
+    -webkit-app-region: no-drag;
+  }
+  
+  /* Canvas container */
+  .canvas-container {
+    @apply relative bg-gray-900 flex items-center justify-center overflow-hidden;
+  }
+  
+  /* Glassy panels */
+  .glass-panel {
+    @apply bg-opacity-20 bg-gray-800 backdrop-blur-sm backdrop-filter rounded-lg border border-gray-700 shadow-lg;
+  }
+  
+  /* Tooltip style */
+  .tooltip {
+    @apply absolute invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 z-10;
+  }
+  
+  /* Animation classes */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* Futuristic UI elements */
+  .neon-border {
+    @apply border border-primary-500 shadow-neon;
+  }
+  
+  .neon-text {
+    @apply text-primary-500 drop-shadow-[0_0_2px_theme(colors.primary.500)];
+  }
+  
+  .neon-accent-text {
+    @apply text-accent-500 drop-shadow-[0_0_2px_theme(colors.accent.500)];
+  }
+  
+  /* Cyber panels */
+  .cyber-panel {
+    @apply relative rounded-lg overflow-hidden border-l-2 border-t-2 border-r-2 border-b-2 border-primary-500 bg-gray-900 p-4;
+    clip-path: polygon(
+      0 10px, 
+      10px 0, 
+      calc(100% - 10px) 0, 
+      100% 10px, 
+      100% calc(100% - 10px), 
+      calc(100% - 10px) 100%, 
+      10px 100%, 
+      0 calc(100% - 10px)
+    );
+  }
+  
+  /* Futuristic grid pattern */
+  .grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+  
+  /* Tool group */
+  .tool-group {
+    @apply border-b border-gray-700 py-3;
+  }
+  
+  .tool-group-title {
+    @apply text-xs uppercase tracking-wider text-gray-400 mb-2 px-3;
+  }
+  
+  /* Canvas zoom controls */
+  .zoom-control {
+    @apply glass-panel flex items-center space-x-2 px-3 py-1 absolute bottom-4 right-4 z-10;
+  }
+  
+  /* Loading indicator */
+  .loading-spinner {
+    @apply w-6 h-6 border-2 border-primary-500 rounded-full animate-spin;
+    border-top-color: transparent;
+  }
+  
+  /* Status bar */
+  .status-bar {
+    @apply bg-gray-900 text-gray-300 text-xs flex items-center justify-between px-4 py-1 border-t border-gray-800;
+  }
+  
+  /* Dropdown menu */
+  .dropdown-menu {
+    @apply absolute right-0 mt-1 glass-panel py-1 w-48 rounded-md shadow-lg z-20;
+  }
+  
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm text-white hover:bg-primary-600 transition-colors duration-150;
+  }
+}
+
+/* Global styles */
+body {
+  @apply font-sans bg-background-dark text-white;
+}
+
+/* Scrollbar enhancements */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-500;
+}
+
+/* Glow effects */
+.glow {
+  filter: drop-shadow(0 0 8px theme('colors.primary.500'));
+}
+
+.glow-accent {
+  filter: drop-shadow(0 0 8px theme('colors.accent.500'));
+}
+
+/* Hover effects */
+.hover-scale {
+  @apply transition-transform duration-200;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Futuristic card */
+.futuristic-card {
+  @apply bg-gray-800 rounded-lg overflow-hidden border border-gray-700 relative;
+}
+
+.futuristic-card::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent pointer-events-none;
+}
+
+/* Interactive buttons */
+.interactive-button {
+  @apply relative overflow-hidden rounded-lg transition-all duration-300 bg-gray-800 border border-gray-700;
+}
+
+.interactive-button::after {
+  content: '';
+  @apply absolute inset-0 bg-primary-500 opacity-0 transition-opacity duration-300;
+}
+
+.interactive-button:hover::after {
+  @apply opacity-20;
+}
+
+/* Background pattern */
+.bg-pattern {
+  background-color: #0f172a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
