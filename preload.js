@@ -1,5 +1,4 @@
 const { contextBridge, ipcRenderer } = require('electron');
-const os = require('os');
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -16,13 +15,7 @@ contextBridge.exposeInMainWorld('electron', {
   writeFile: (options) => ipcRenderer.invoke('write-file', options),
   
   // App info
-  appInfo: {
-    platform: os.platform(),
-    release: os.release(),
-    arch: os.arch(),
-    cpus: os.cpus().length,
-    totalMemory: os.totalmem()
-  },
+  appInfo: () => ipcRenderer.invoke('get-app-info'),
   
   // Menu handlers
   onMenuAction: (channel, callback) => {

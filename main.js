@@ -1,11 +1,15 @@
 const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const url = require('url');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
+
+// Is development environment
+const isDev = process.env.ELECTRON_DEV === 'true';
 
 let mainWindow;
 
@@ -28,12 +32,22 @@ function createWindow() {
     icon: path.join(__dirname, 'assets/icons/png/512x512.png')
   });
 
-  // Load the index.html
-  mainWindow.loadFile(path.join(__dirname, 'build/index.html'));
-
-  // Open DevTools in development
-  if (process.env.NODE_ENV === 'development') {
+  // Load the app
+  if (isDev) {
+    // In development, load from Vite dev server
+    mainWindow.loadURL('http://localhost:3000');
+    
+    // Open DevTools in development
     mainWindow.webContents.openDevTools();
+  } else {
+    // In production, load the built index.html
+    mainWindow.loadURL(
+      url.format({
+        pathname: path.join(__dirname, 'build/index.html'),
+        protocol: 'file:',
+        slashes: true
+      })
+    );
   }
 
   // Window controls handling
@@ -53,6 +67,16 @@ function createWindow() {
     mainWindow.close();
   });
 }
+
+ipcMain.handle('get-app-info', () => {
+  return {
+    platform: os.platform(),
+    release: os.release(),
+    arch: os.arch(),
+    cpus: os.cpus().length,
+    totalMemory: os.totalmem()
+  };
+});
 
 // File operations
 ipcMain.handle('open-file-dialog', async () => {
